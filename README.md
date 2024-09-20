@@ -1,66 +1,184 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+### README - Installation du projet Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+---
 
-## About Laravel
+## Table des matières
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. [Prérequis](#prérequis)
+2. [Installation avec Docker Compose](#installation-avec-docker-compose)
+3. [Installation sans Docker Compose](#installation-sans-docker-compose)
+4. [Utilisation de l'API](#utilisation-de-lapi)
+5. [Tests](#tests)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Prérequis
 
-## Learning Laravel
+Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre machine :
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Docker** et **Docker Compose** (si vous utilisez l'installation Docker).
+- **PHP 8.3** ou supérieur (si vous installez manuellement sans Docker).
+- **Composer** (gestionnaire de dépendances PHP).
+- **MySQL 8.0** ou supérieur (si vous installez manuellement).
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Installation avec Docker Compose
 
-## Laravel Sponsors
+### Étape 1 : Cloner le dépôt
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+git clone https://github.com/votre-utilisateur/mon-projet-facture.git
+cd mon-projet-facture
+```
 
-### Premium Partners
+### Étape 2 : Lancer Docker Compose
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Lancez l'application avec Docker Compose en exécutant la commande suivante :
 
-## Contributing
+```bash
+docker-compose up --build
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Docker Compose va :
+- Télécharger les dépendances si elles ne sont pas présentes.
+- Lancer un service PHP avec Laravel.
+- Lancer un conteneur MySQL pour la base de données.
 
-## Code of Conduct
+### Étape 3 : Migrer la base de données
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Ensuite, exécutez les migrations pour créer les tables de la base de données :
 
-## Security Vulnerabilities
+```bash
+docker-compose exec web php artisan migrate --seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Accéder à l'application
 
-## License
+L'application est maintenant disponible à l'adresse [http://localhost:8000](http://localhost:8000).
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## Installation sans Docker Compose
+
+Si vous préférez installer le projet manuellement sans Docker Compose, suivez les étapes suivantes.
+
+### Étape 1 : Cloner le dépôt
+
+```bash
+git clone https://github.com/votre-utilisateur/mon-projet-facture.git
+cd mon-projet-facture
+```
+
+### Étape 2 : Installer PHP et les dépendances
+
+Assurez-vous que **PHP 8.3** ou supérieur est installé sur votre machine.
+
+Installez les dépendances PHP avec Composer :
+
+```bash
+composer install
+```
+
+### Étape 3 : Configuration de l'environnement
+
+Copiez le fichier `.env.example` et configurez les informations de la base de données MySQL :
+
+```bash
+cp .env.example .env
+```
+
+Modifiez les variables dans le fichier `.env` pour pointer vers votre base de données MySQL locale.
+
+Générez la clé de l'application Laravel :
+
+```bash
+php artisan key:generate
+```
+
+### Étape 4 : Configurer la base de données
+
+Créez une base de données MySQL (par exemple `laravel`), puis exécutez les migrations pour créer les tables :
+
+```bash
+php artisan migrate --seed
+```
+
+### Étape 5 : Lancer le serveur Laravel
+
+Lancez le serveur Laravel localement :
+
+```bash
+php artisan serve
+```
+
+L'application sera accessible à l'adresse [http://localhost:8000](http://localhost:8000).
+
+---
+
+## Utilisation de l'API
+
+L'API vous permet de gérer des **factures** et leurs **lignes de factures**. Voici quelques exemples de requêtes que vous pouvez effectuer :
+
+### 1. Lister les factures (paginées et triées)
+/!\ Le paramètre 'password' est obligatoire pour accéder à cette route.
+```bash
+GET /api/v1/invoices?password=1234
+```
+
+Vous pouvez ajouter des paramètres pour le tri :
+- **order-by** : `total`, `sent_at`, `customer`
+- **order** : `asc` ou `desc`
+
+Exemple :
+
+```bash
+GET /api/v1/invoices?password=1234&order-by=total&order=desc
+```
+
+### 2. Créer une nouvelle facture
+
+```bash
+POST /api/v1/invoices
+```
+
+Body (JSON) :
+
+```json
+{
+  "customer": "John Doe",
+  "number": "FA-2023-001",
+  "status": "sent",
+  "sent_at": "2023-01-01",
+  "lines": [
+    { "product": "Produit 1", "amount": 100.50 },
+    { "product": "Produit 2", "amount": 50.75 }
+  ]
+}
+```
+
+### 3. Filtrer et trier les factures
+
+```bash
+GET /api/v1/invoices?password=1234&order-by=total&order=desc
+```
+
+---
+
+## Tests
+
+### Exécution des tests avec Docker Compose
+
+Pour exécuter les tests unitaires et fonctionnels dans le conteneur Docker :
+
+```bash
+docker-compose exec web php artisan test
+```
+
+### Exécution des tests sans Docker
+
+Si vous avez installé le projet sans Docker, lancez les tests directement depuis votre machine :
+
+```bash
+php artisan test
+```
