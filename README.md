@@ -28,8 +28,8 @@ Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur 
 ### Étape 1 : Cloner le dépôt
 
 ```bash
-git clone https://github.com/votre-utilisateur/mon-projet-facture.git
-cd mon-projet-facture
+git clone [https://github.com/votre-utilisateur/mon-projet-facture.git](https://github.com/FluryWaana/invoices.git)
+cd invoices
 ```
 
 ### Étape 2 : Lancer Docker Compose
@@ -66,8 +66,8 @@ Si vous préférez installer le projet manuellement sans Docker Compose, suivez 
 ### Étape 1 : Cloner le dépôt
 
 ```bash
-git clone https://github.com/votre-utilisateur/mon-projet-facture.git
-cd mon-projet-facture
+git clone [https://github.com/votre-utilisateur/mon-projet-facture.git](https://github.com/FluryWaana/invoices.git)
+cd invoices
 ```
 
 ### Étape 2 : Installer PHP et les dépendances
